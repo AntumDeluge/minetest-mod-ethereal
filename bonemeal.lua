@@ -4,43 +4,43 @@ local S = ethereal.intllib
 -- bone item (use "animalmaterials:bone" if available)
 local ethereal_bone = 'ethereal:bone'
 if minetest.get_modpath('animalmaterials') then
-  ethereal_bone = 'animalmaterials:bone'
+	ethereal_bone = 'animalmaterials:bone'
 else
-  minetest.register_craftitem('ethereal:bone', {
-    description = S('Bone'),
-    inventory_image = 'bone.png',
-  })
+	minetest.register_craftitem('ethereal:bone', {
+		description = S('Bone'),
+		inventory_image = 'bone.png',
+	})
 end
 
 -- bonemeal item
 minetest.register_craftitem("ethereal:bonemeal", {
-  description = S("Bone Meal"),
-  inventory_image = "bonemeal.png",
-
-  on_use = function(itemstack, user, pointed_thing)
-
-    if pointed_thing.type == "node" then
-
-      -- Check if node protected
-      if minetest.is_protected(pointed_thing.under, user:get_player_name()) then
-        return
-      end
-
-      if not minetest.setting_getbool("creative_mode") then
-
-        local item = user:get_wielded_item()
-
-        item:take_item()
-        user:set_wielded_item(item)
-      end
-
-      growth(pointed_thing)
-
-      itemstack:take_item()
-
-      return itemstack
-    end
-  end,
+	description = S("Bone Meal"),
+	inventory_image = "bonemeal.png",
+	
+	on_use = function(itemstack, user, pointed_thing)
+		
+		if pointed_thing.type == "node" then
+			
+		    -- Check if node protected
+		    if minetest.is_protected(pointed_thing.under, user:get_player_name()) then
+		    	return
+			end
+			
+			if not minetest.setting_getbool("creative_mode") then
+			
+				local item = user:get_wielded_item()
+				
+				item:take_item()
+				user:set_wielded_item(item)
+			end
+			
+			growth(pointed_thing)
+			
+			itemstack:take_item()
+			
+			return itemstack
+		end
+	end,
 })
 
 -- bonemeal recipes
